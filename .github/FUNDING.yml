@@ -10,3 +10,53 @@ liberapay: # Replace with a single Liberapay username
 issuehunt: # Replace with a single IssueHunt username
 otechie: # Replace with a single Otechie username
 custom: # Replace with a single custom sponsorship URL
+git remote
+origin
+$ git remote
+origin
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+origin	https://github.com/schacon/ticgit (fetch)
+origin	https://github.com/schacon/ticgit (push)
+pb	https://github.com/paulboone/ticgit (fetch)
+pb	https://github.com/paulboone/ticgit (push)
+$ git remote show origin
+* remote origin
+$ git tag -l "v1.8.5*"
+v1.8.5
+v1.8.5-rc0
+v1.8.5-rc1
+v1.8.5-rc2
+v1.8.5-rc3
+v1.8.5.1
+v1.8.5.2
+v1.8.5.3
+v1.8.5.4
+v1.8.5.5
+$ git checkout 2.0.0
+Note: checking out '2.0.0'.
+$ git add README test.rb LICENSE
+$ git commit -m 'The initial commit of my project'
+$ cd /var/www/htdocs/
+$ git clone --bare /path/to/git_project gitproject.git
+$ cd gitproject.git
+$ mv hooks/post-update.sample hooks/post-update
+$ chmod a+x hooks/post-update
+$ sudo adduser git
+$ su git
+$ cd
+$ mkdir .ssh && chmod 700 .ssh
+$ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
+$ sudo apt-get install apache2 apache2-utils
+$ a2enmod cgi alias env
+$ chgrp -R www-data /srv/git
+SetEnv GIT_PROJECT_ROOT /srv/git
+SetEnv GIT_HTTP_EXPORT_ALL
+ScriptAlias /git/ /usr/lib/git-core/git-http-backend/
+<Files "git-http-backend">
+    AuthType Basic
+    AuthName "Git Access"
+    AuthUserFile /srv/git/.htpasswd
+    Require expr !(%{QUERY_STRING} -strmatch '*service=git-receive-pack*' || %{REQUEST_URI} =~ m#/git-receive-pack$#)
+    Require valid-user
+</Files>
